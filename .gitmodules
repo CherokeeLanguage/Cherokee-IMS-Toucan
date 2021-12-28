@@ -1,0 +1,12 @@
+[submodule "data/cherokee-audio-data"]
+	path = data/cherokee-audio-data
+	url = ../../CherokeeLanguage/cherokee-audio-data.git
+[submodule "data/cherokee-audio-data-private"]
+	path = data/cherokee-audio-data-private
+	url = ../../CherokeeLanguage/cherokee-audio-data-private.git
+[submodule "data/other-audio-data"]
+	path = data/other-audio-data
+	url = ../../CherokeeLanguage/other-audio-data.git
+[submodule "IMS_Toucan"]
+	path = IMS_Toucan
+	url = ../../CherokeeLanguage/IMS-Toucan.git
