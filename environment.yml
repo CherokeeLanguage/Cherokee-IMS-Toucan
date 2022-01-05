@@ -117,7 +117,9 @@ dependencies:
   - pip=21.2.4
   - pixman=0.40.0
   - pooch=1.4.0
+  - progressbar=2.5
   - pycparser=2.21
+  - pydub=0.25.1
   - pyopenssl=21.0.0
   - pyparsing=3.0.4
   - pyqt=5.9.2
