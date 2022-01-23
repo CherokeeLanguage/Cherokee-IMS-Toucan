@@ -43,35 +43,31 @@ def main():
     for audio_file_glob in src_audio_globs:
         all_audio_files.extend(glob.glob(f"{audio_file_glob}"))
 
-    print("Creating clean audio files")
-    idx: int = 0
-    for audio_file in tqdm(all_audio_files):
-        idx += 1
-        audio_file_noisy: str = f"{idx:09d}_clean.wav"
-        audio: AudioSegment = AudioSegment.from_file(audio_file)
-        audio = audio.set_channels(1).set_frame_rate(output_sr)
-        audio.export(os.path.join(dest_audio_dir, audio_file_noisy), format="wav")
-
-    print("Creating noisy audio files")
     noise_audio_segments: List[AudioSegment] = list()
     for noise_file in glob.glob(noise_audio_glob):
         noise_audio_segments.append(AudioSegment.from_file(noise_file).set_frame_rate(output_sr).set_channels(1))
     ran: random.Random = random.Random(len(noise_audio_segments))
+
+    print("Creating audio files")
     idx: int = 0
     for audio_file in tqdm(all_audio_files):
         idx += 1
+        audio_file_clean: str = f"{idx:09d}_clean.wav"
+        audio: AudioSegment = AudioSegment.from_file(audio_file)
+        audio = audio.set_channels(1).set_frame_rate(output_sr)
+        audio.export(os.path.join(dest_audio_dir, audio_file_clean), format="wav")
+
         ran.shuffle(noise_audio_segments)
         noise_overlay: AudioSegment = AudioSegment.silent(frame_rate=output_sr)
         for segment in noise_audio_segments:
             noise_overlay = noise_overlay.append(segment)
-        audio_file_noisy: str = f"{idx:09d}_noisy.wav"
-        audio: AudioSegment = AudioSegment.from_file(audio_file).set_frame_rate(output_sr)
         audio = audio.overlay(noise_overlay, loop=True)
         if ran.choice([True, False, False]):
             audio = audio.set_frame_rate(8000).set_frame_rate(output_sr)
         elif ran.choice([True, False, False]):
             audio = audio.set_frame_rate(4000).set_frame_rate(output_sr)
         audio = audio.set_channels(1)
+        audio_file_noisy: str = f"{idx:09d}_noisy.wav"
         audio.export(os.path.join(dest_audio_dir, audio_file_noisy), format="wav")
 
 
