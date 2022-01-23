@@ -15,7 +15,7 @@ import torch
 
 from IMS_Toucan.TrainingInterfaces.Spectrogram_to_Wave.HiFIGAN.HiFiGAN import HiFiGANGenerator
 from IMS_Toucan.TrainingInterfaces.Spectrogram_to_Wave.HiFIGAN.HiFiGAN import HiFiGANMultiScaleMultiPeriodDiscriminator
-from IMS_Toucan.TrainingInterfaces.Spectrogram_to_Wave.HiFIGAN.HiFiGANDataset_disklist import HiFiGANDataset
+from IMS_Toucan.TrainingInterfaces.Spectrogram_to_Wave.HiFIGAN.HiFiGANDataset_disk import HiFiGANDataset
 from IMS_Toucan.TrainingInterfaces.Spectrogram_to_Wave.HiFIGAN.hifigan_train_loop import train_loop
 from Utility.file_lists import *
 
@@ -53,7 +53,7 @@ def main():
                device=device,
                epochs_per_save=1,
                model_save_dir=model_save_dir,
-               path_to_checkpoint=os.path.join(model_save_dir, "checkpoint_328158.pt"))
+               path_to_checkpoint=None)  # os.path.join(model_save_dir, "checkpoint_328158.pt"))
 
 
 if __name__ == "__main__":
