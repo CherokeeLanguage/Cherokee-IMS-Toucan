@@ -63,7 +63,7 @@ def main():
         ran.shuffle(noise_audio_segments)
         noise_overlay: AudioSegment = AudioSegment.silent(frame_rate=output_sr)
         for segment in noise_audio_segments:
-            noise_overlay.append(segment)
+            noise_overlay = noise_overlay.append(segment)
         audio_file_noisy: str = f"{idx:09d}_noisy.wav"
         audio: AudioSegment = AudioSegment.from_file(audio_file).set_frame_rate(output_sr)
         audio = audio.overlay(noise_overlay, loop=True)
